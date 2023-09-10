@@ -3,8 +3,12 @@ import Layout from '../pages/Layout';
 import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home';
 import Tranactions from '../pages/Tranactions';
-import Categories from '../pages/Categories';
+import Categories, {
+  categoriesActions,
+  categoryLoader,
+} from '../pages/Categories';
 import Auth from '../pages/Auth';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -18,11 +22,21 @@ export const router = createBrowserRouter([
       },
       {
         path: 'transactions',
-        element: <Tranactions />,
+        element: (
+          <ProtectedRoute>
+            <Tranactions />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'categories',
-        element: <Categories />,
+        action: categoriesActions,
+        loader: categoryLoader,
+        element: (
+          <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'auth',
