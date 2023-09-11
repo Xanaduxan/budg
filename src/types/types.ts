@@ -27,5 +27,26 @@ export interface ICategory {
   id: number;
   createdAt: string | undefined;
   updatedAt: string | undefined;
-  transactions: [];
+  transactions?: [];
+}
+
+interface TotalIncome {
+  transactions: ITransaction;
+  total: number;
+}
+export interface IResponseTransactionLoader {
+  categories: ICategory[];
+  transactions: ITransaction[];
+  totalIncome: TotalIncome;
+  totalExpense: TotalIncome;
+}
+
+export interface ITransaction {
+  amount: number;
+  createdAt: string | undefined;
+  updatedAt: string | undefined;
+  title: string;
+  type: string;
+  id: number;
+  category: ICategory;
 }
